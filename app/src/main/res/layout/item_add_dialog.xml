@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/blue_fon"
+    android:padding="20dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dialogdan chiqish uchun ekranni boshqa joyiga bosing"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:layout_margin="20sp"/>
+
+   <EditText
+       android:id="@+id/edt_kurs_name"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:hint="Kurs nomi"
+       android:background="@color/yellow_fon"
+       android:padding="20dp"
+       android:layout_margin="10dp"
+       android:textColor="@color/white"
+       android:textSize="20sp"/>
+
+    <Button
+        android:id="@+id/btn_dialog_save"
+        android:layout_margin="20dp"
+        android:padding="10dp"
+        android:layout_gravity="center"
+        android:backgroundTint="@color/yellow_fon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Saqlash"/>
+
+</LinearLayout>

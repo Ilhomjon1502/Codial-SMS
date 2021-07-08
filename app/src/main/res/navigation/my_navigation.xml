@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_navigation"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.ilhomjon.codialsms.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_sinfListFragment"
+            app:destination="@id/sinfListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/sinfListFragment"
+        android:name="com.ilhomjon.codialsms.SinfListFragment"
+        android:label="fragment_sinf_list"
+        tools:layout="@layout/fragment_sinf_list" >
+        <action
+            android:id="@+id/action_sinfListFragment_to_guruhShowFragment"
+            app:destination="@id/guruhShowFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/guruhShowFragment"
+        android:name="com.ilhomjon.codialsms.GuruhShowFragment"
+        android:label="fragment_guruh_show"
+        tools:layout="@layout/fragment_guruh_show" >
+        <action
+            android:id="@+id/action_guruhShowFragment_to_sendSmsKimgaFragment"
+            app:destination="@id/sendSmsKimgaFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/sendSmsKimgaFragment"
+        android:name="com.ilhomjon.codialsms.SendSmsKimgaFragment"
+        android:label="fragment_send_sms_kimga"
+        tools:layout="@layout/fragment_send_sms_kimga" />
+    <fragment
+        android:id="@+id/smsXabarSendFragment"
+        android:name="com.ilhomjon.codialsms.SmsXabarSendFragment"
+        android:label="fragment_sms_xabar_send"
+        tools:layout="@layout/fragment_sms_xabar_send" />
+</navigation>
