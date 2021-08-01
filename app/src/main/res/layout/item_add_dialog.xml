@@ -21,6 +21,7 @@
        android:id="@+id/edt_kurs_name"
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
+       android:layout_weight="1"
        android:hint="Kurs nomi"
        android:background="@color/yellow_fon"
        android:padding="20dp"

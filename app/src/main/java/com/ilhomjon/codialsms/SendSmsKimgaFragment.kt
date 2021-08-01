@@ -9,27 +9,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import com.ilhomjon.codialsms.databinding.FragmentSendSmsKimgaBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
 class SendSmsKimgaFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
 
     lateinit var binding:FragmentSendSmsKimgaBinding
     lateinit var guruh: Guruh
@@ -74,7 +59,14 @@ class SendSmsKimgaFragment : Fragment() {
             sendSmsKimgaAdapter.chackList.forEach {
                 talabaNumberList.add(it.phone!!)
             }
-            findNavController().navigate(R.id.smsXabarSendFragment, bundleOf("phones" to talabaNumberList))
+            if (talabaNumberList.isNotEmpty()) {
+                findNavController().navigate(
+                    R.id.smsXabarSendFragment,
+                    bundleOf("phones" to talabaNumberList)
+                )
+            }else{
+                Toast.makeText(context, "Birorta ham talaba tanlanmadi", Toast.LENGTH_SHORT).show()
+            }
         }
 
         return binding.root
@@ -84,17 +76,5 @@ class SendSmsKimgaFragment : Fragment() {
         super.onResume()
         sendSmsKimgaAdapter = SendSmsKimgaAdapter(context, talabaGuruh)
         binding.rvSmsKimga.adapter = sendSmsKimgaAdapter
-    }
-
-    companion object {
-
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            SendSmsKimgaFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
     }
 }

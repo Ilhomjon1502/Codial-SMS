@@ -5,7 +5,6 @@ import Adapters.SmsXabariAdapter
 import Database.AppDatabase
 import Entity.SmsText
 import android.Manifest
-import android.R.attr.phoneNumber
 import android.app.AlertDialog
 import android.os.AsyncTask
 import android.os.Bundle
@@ -22,24 +21,7 @@ import com.ilhomjon.codialsms.databinding.FragmentSmsXabarSendBinding
 import com.ilhomjon.codialsms.databinding.ItemAddDialogBinding
 import java.util.concurrent.TimeUnit
 
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
 class SmsXabarSendFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
 
     lateinit var binding: FragmentSmsXabarSendBinding
     lateinit var talabaNumber: ArrayList<String>
@@ -214,18 +196,11 @@ class SmsXabarSendFragment : Fragment() {
             super.onPostExecute(result)
             binding.linerRoot.alpha = 1.0f
             binding.progressSend.visibility = View.GONE
-            Toast.makeText(context, "$listError larda xatolik", Toast.LENGTH_SHORT).show()
+            if (listError.isNotEmpty()) {
+                Toast.makeText(context, "$listError larda xatolik", Toast.LENGTH_SHORT).show()
+            }else{
+                Toast.makeText(context, "Muvaffaqiyatli yuborildi", Toast.LENGTH_SHORT).show()
+            }
         }
-    }
-
-    companion object {
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-                SmsXabarSendFragment().apply {
-                    arguments = Bundle().apply {
-                        putString(ARG_PARAM1, param1)
-                        putString(ARG_PARAM2, param2)
-                    }
-                }
     }
 }

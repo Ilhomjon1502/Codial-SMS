@@ -106,7 +106,8 @@ class HomeFragment : Fragment() {
                             kurs.id = appDatabase.kursDao().getKursById(kurs.name!!)
                             val alerdDialog = AlertDialog.Builder(context)
                             val dialog = alerdDialog.create()
-                            val itemAddDialogBinding = ItemAddDialogBinding.inflate(LayoutInflater.from(context))
+                            val itemAddDialogBinding =
+                                ItemAddDialogBinding.inflate(LayoutInflater.from(context))
                             dialog.setView(itemAddDialogBinding.root)
                             itemAddDialogBinding.edtKursName.setText(kurs.name)
                             itemAddDialogBinding.btnDialogSave.setOnClickListener {
@@ -131,7 +132,11 @@ class HomeFragment : Fragment() {
                                     Toast.makeText(context, "Saqlandi", Toast.LENGTH_SHORT).show()
                                     dialog.cancel()
                                 } else {
-                                    Toast.makeText(context, "Avval ma'lumotlarni to'ldiring!!!", Toast.LENGTH_SHORT)
+                                    Toast.makeText(
+                                        context,
+                                        "Avval ma'lumotlarni to'ldiring!!!",
+                                        Toast.LENGTH_SHORT
+                                    )
                                         .show()
                                 }
                             }
@@ -139,15 +144,33 @@ class HomeFragment : Fragment() {
                         }
                         R.id.delete_menu -> {
                             val dialog = AlertDialog.Builder(context)
-                            dialog.setTitle("${kurs.id} ${kurs.name} o'chirilsinmi?" +
-                                    "\nAgar bu kurs o'chirilsa undagi barcha guruhlar, o'quvchilar o'chib ketadi!!!")
+                            dialog.setTitle(
+                                "${kurs.id} ${kurs.name} o'chirilsinmi?" +
+                                        "\nAgar bu kurs o'chirilsa undagi barcha guruhlar, o'quvchilar o'chib ketadi!!!"
+                            )
                             dialog.setPositiveButton(
                                 "Ha roziman"
                             ) { dialog, which ->
                                 val id = appDatabase.kursDao().getKursById(kurs.name!!)
                                 kurs.id = id
                                 appDatabase.kursDao().deleteKurs(kurs)
-                                Toast.makeText(context, "$id ${kurs.name} o'chirildi", Toast.LENGTH_SHORT).show()
+                                appDatabase.gurugDao().getAllGuruh().forEach {
+                                    if (it.kursId == kurs.id) {
+                                        it.id = appDatabase.gurugDao().getGuruhById(it.name!!)
+                                        appDatabase.gurugDao().deleteGuruh(it)
+                                        for (t in appDatabase.talabaDao().getAllTalaba()) {
+                                            if (t.guruhId == it.id){
+                                                t.id = appDatabase.talabaDao().getTalabaById(t.phone!!)
+                                                appDatabase.talabaDao().deleteTalaba(t)
+                                            }
+                                        }
+                                    }
+                                }
+                                Toast.makeText(
+                                    context,
+                                    "$id ${kurs.name} o'chirildi",
+                                    Toast.LENGTH_SHORT
+                                ).show()
                                 onResume()
                             }
                             dialog.setNegativeButton(
